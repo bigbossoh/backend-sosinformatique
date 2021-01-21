@@ -3,20 +3,14 @@ package ci.sosinformatique.service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 import ci.sosinformatique.dao.ClientSocieteRepository;
 import ci.sosinformatique.dao.TicketRepository;
@@ -29,6 +23,7 @@ import lombok.experimental.FieldDefaults;
 @RestController
 @RequestMapping("api/v1/")
 @CrossOrigin("*")
+
 public class TicketController {
 	DateFormat dateFormatHeure = new SimpleDateFormat("HH:mm");
 	DateFormat dateFormatJour = new SimpleDateFormat("dd-MM-yyyy");
@@ -85,15 +80,64 @@ public class TicketController {
 		System.out.println("Le Client n'existe pas");
 		return false;		
 	}
-	
+	@PutMapping("/updateTicket")
+	@Transactional
+	public boolean updateTicket(@RequestBody TicketForm ticketForm) {
+		Ticket ticket = null;
+		ClientSociete cs=null;
+		try {
+			ticket = ticketRepository.findById(ticketForm.getId()).orElseThrow(()->new Exception("Id ticket not found"));
+
+			ticket.setArchiver(ticketForm.isArchiver());
+			ticket.setCloture(ticketForm.isCloture());
+			ticket.setHeureDemande(dateFormatHeure.parse(ticketForm.getHeureDemande()));
+			ticket.setHeureProgrammer(dateFormatHeure.parse(ticketForm.getHeureProgrammer()));
+			ticket.setDescSuscinte(ticketForm.getDescSuscinte());
+			ticket.setDateDemandeTicket(dateFormatJour.parse(ticketForm.getDateDemandeTicket()));
+			ticket.setDateProgrammer(dateFormatJour.parse(ticketForm.getDateProgrammer()));
+			ticket.setEnAttente(ticketForm.isEnAttente());
+			cs=clientSocieteRepository.findById(ticketForm.getClientSoc()).orElseThrow(()->new Exception("Error "));;
+			ticket.setClientSoc(cs);
+			ticketRepository.save(ticket);
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		return false;
+	}
+	@DeleteMapping("/deleteTicket/{id}")
+	@Transactional
+	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long IdTicket)
+			throws ResourceNotFoundException {
+		Map<String, Boolean> response = new HashMap<>();
+		Ticket ticket = ticketRepository.findById(IdTicket)
+				.orElseThrow(() -> new ResourceNotFoundException("Ticket not found for this id :: " + IdTicket));
+		if (ticket.isEnAttente()) {
+			ticketRepository.delete(ticket);
+
+			response.put("deleted", Boolean.TRUE);
+
+		}
+		else {response.put("is not in waiting state", Boolean.FALSE);
+
+		}
+		return response;
+	}
 }
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class TicketForm{
+	Long id;
 	String dateDemandeTicket;
 	String heureDemande;
 	String dateProgrammer;
 	String descSuscinte;
 	String heureProgrammer;
+	boolean cloture;
+	boolean archiver;
+	boolean enAttente;
 	Long clientSoc;
 }

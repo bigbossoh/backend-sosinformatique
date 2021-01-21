@@ -71,7 +71,7 @@ int vIdItket=1;
 
 	@Override
 	public void run(String... args) throws Exception {
-		restConfiguration.exposeIdsFor(Ticket.class,Employe.class);
+		restConfiguration.exposeIdsFor(Ticket.class,Employe.class,Intervenant.class);
 		// CREATION DE CLIENTSOCIETE
 		for (int i = 0; i < 5; i++) {
 

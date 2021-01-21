@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Intervenant implements Serializable {
 	String telIntervenante;
 	String emailIntervenante;
 	 @OneToMany(mappedBy = "interv")
+	 @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	 Collection<Intervention>interventions;
 
 }
