@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listeDesTicketsParEntreprise" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ae0117e-15bf-43e6-8c4f-edc2e225cb0b">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YmRzb3NpbmZvcm1hdGlxdWUudGlja2V0ICwxNzEsMTUsZTc1OWQ3OWUtMjEwYy00MmEwLWFkZDIt
+NjQ4ZDA1NmE4YTJkO2Jkc29zaW5mb3JtYXRpcXVlLmNsaWVudF9zb2NpZXRlICwxNSw2NyxiZjg5
+ZmFmMS1jMTFiLTQ5MjEtYmY1MC04Y2UxYzk1MTc0ZmU7]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="305"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="683"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Con SOS Informatique"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT bdsosinformatique.client_societe.nom_soc,
+	bdsosinformatique.ticket.date_programmer,
+	bdsosinformatique.ticket.date_demande_ticket,
+	bdsosinformatique.ticket.en_attente,
+	bdsosinformatique.ticket.heure_demande,
+	bdsosinformatique.ticket.desc_suscinte,
+	bdsosinformatique.client_societe.id,
+	bdsosinformatique.ticket.archiver,
+	bdsosinformatique.ticket.cloture,
+	bdsosinformatique.ticket.id
+FROM bdsosinformatique.ticket
+	INNER JOIN bdsosinformatique.client_societe ON 
+	 bdsosinformatique.client_societe.id = bdsosinformatique.ticket.client_soc_id]]>
+	</queryString>
+	<field name="nom_soc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom_soc"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom_soc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="client_societe"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_programmer" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_programmer"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_programmer"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_demande_ticket" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_demande_ticket"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_demande_ticket"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_attente" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="en_attente"/>
+		<property name="com.jaspersoft.studio.field.label" value="en_attente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="heure_demande" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="heure_demande"/>
+		<property name="com.jaspersoft.studio.field.label" value="heure_demande"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desc_suscinte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="desc_suscinte"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_suscinte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="client_societe"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="archiver" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="archiver"/>
+		<property name="com.jaspersoft.studio.field.label" value="archiver"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cloture" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="cloture"/>
+		<property name="com.jaspersoft.studio.field.label" value="cloture"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="nom_soc">
+		<groupExpression><![CDATA[$F{nom_soc}]]></groupExpression>
+	</group>
+	<group name="GroupeEts">
+		<groupExpression><![CDATA[$F{nom_soc}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="802" height="31" backcolor="#8A504E" uuid="27f36828-44d8-4bd5-8ec2-d1450095d06f">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+				</rectangle>
+				<textField>
+					<reportElement x="121" y="1" width="100" height="30" uuid="c25e6651-99b0-43df-8119-d55d5031116e"/>
+					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="227" y="1" width="100" height="30" uuid="79e25477-744e-47ea-bf13-41b11c14d0e6"/>
+					<textFieldExpression><![CDATA[$F{nom_soc}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="79" uuid="1da9a300-d44a-4b69-8ec8-c1dd35b95b65"/>
+				<textElement textAlignment="Center">
+					<font size="40"/>
+				</textElement>
+				<text><![CDATA[Listes des tickets par entreprise]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="701" y="6" width="100" height="30" uuid="f10ae1ae-0e0c-4670-ae10-a4f835ecaf6a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="30" backcolor="#961614" uuid="b67ed605-f97b-4344-ad74-48c876e3b15b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="438" y="0" width="100" height="30" forecolor="#FCF7F7" uuid="ba44b897-3118-4e07-80b4-d96f49df717a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4cbeca82-f64e-4805-b020-ff5c80d3b98e"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Programmé le]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="544" y="0" width="100" height="30" forecolor="#FCF7F7" uuid="d8e6d0f8-802c-4eeb-a5a5-4f5061567384">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="32529a60-8aca-4e74-8ae2-37a859463d22"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[En attente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="648" y="0" width="100" height="30" forecolor="#FCF7F7" uuid="a405c2c0-e030-4891-b8e5-231aa98b96b3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="64154e5e-5b70-4ea9-9eb7-b8d7ace8b681"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[cloturé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="100" height="30" forecolor="#FCF7F7" uuid="77e87fb6-f805-4830-ac69-844ec7b25ba8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a96443a-6dc1-4b59-9255-ebc3cdac7e39"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Demandé le]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="438" y="-1" width="100" height="30" uuid="a472df96-661f-4384-acb4-2aa3e67b6916">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4cbeca82-f64e-4805-b020-ff5c80d3b98e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{date_programmer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="544" y="-1" width="100" height="30" uuid="c5033671-4768-4637-926d-35a0bcba7a74">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="32529a60-8aca-4e74-8ae2-37a859463d22"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{en_attente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="648" y="1" width="100" height="30" uuid="937c67c5-16c4-4209-af35-3d17242405b8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="64154e5e-5b70-4ea9-9eb7-b8d7ace8b681"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cloture}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="-1" width="100" height="30" uuid="568951a8-9db4-4505-9f9e-55e8fc543768">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a96443a-6dc1-4b59-9255-ebc3cdac7e39"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{date_demande_ticket}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
